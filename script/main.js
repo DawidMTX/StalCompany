@@ -10,7 +10,7 @@ window.addEventListener('scroll',() => {
     console.log(scrollY);
     if (scrollY > navBarScroll){
         navBar.classList.add("nav__active")
-        navLogo.src = "/img/only_logo.png"
+        navLogo.src = "img/only_logo.png"
         navUl.forEach((li) =>{
             li.classList.add('nav__menu-list__active')})
         navH1.classList.add('company-name-h1__active')
@@ -22,7 +22,7 @@ window.addEventListener('scroll',() => {
         
     }else if (scrollY< navBarScroll){
         navBar.classList.remove('nav__active');
-        navLogo.src = "/img/only_logo-white.png"
+        navLogo.src = "img/only_logo-white.png"
         navUl.forEach((li) =>{
             li.classList.remove('nav__menu-list__active')})
             navH1.classList.remove('company-name-h1__active')
