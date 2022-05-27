@@ -80,7 +80,7 @@ animation: logoMove .8s;
     font-weight: 600;
 }
 .bg-header {
-    background-image: url(/img/welder-red.jpg);
+    background-image: url(img/welder-red.jpg);
     background-position: center;
     background-size: cover;
     position: absolute;
@@ -277,7 +277,7 @@ animation: logoMove .8s;
 }
 
 .container-1{
-   background-image: url(/img/foto1.jpg);
+   background-image: url(img/foto1.jpg);
    background-repeat: no-repeat;
    background-size:cover;
    background-position: center;
@@ -295,7 +295,7 @@ animation: logoMove .8s;
 
 
 .container-4{
-    background-image: url(/img/foto2.jpg);
+    background-image: url(img/foto2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
