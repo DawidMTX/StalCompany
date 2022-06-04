@@ -21,18 +21,24 @@
         <div class="text-header">
             <img src="img/only_logo-white.png" class="text-header__logo">
             <h2>stal company</h2>
-            <h1>O <span>stali</span> wiemy wszytsko </h1>
+            <h1>O <span>stali</span> wiemy wszystko </h1>
 
         </div>
         <div class="nav">
             <div class="nav__container">
                 <div class="nav__wraper">
                     <div class="nav__company-name">
-                        <img src="img/only_logo-white.png" class="nav__logo">
+                        <img src="img/only_logo.png" class="nav__logo-black">
+                        <img src="img/only_logo-white.png" class="nav__logo-white">
                         <a href="#start" class="logo-button">
                             <h1 class="company-name-h1">Stal Company</h1>
                         </a>
                         <h2>Jakość wykuta w stali</h2>
+                    </div>
+                    <div class="nav__hamburger" >
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                     <ul class="nav__menu-list">
                         <li>
@@ -205,18 +211,8 @@
     <section class="gallery">
 
         <h1 class=gallery__h1>Nasza oferta</h1>
-
-        <div class="gallery__min-picture">
-            <div class="min-picture is-selected" data-control="1"><img src="img/pexels-anna-shvets-4315558-2.jpg"
-                    usemap="#mapa"></div>
-            <div class="min-picture" data-control="2"><img src="img/welder.jpg" alt="" usemap="#mapa"></div>
-            <div class="min-picture" data-control="3"><img src="img/pexels-rik-schots-11624248.jpg" alt=""
-                    usemap="#mapa">
-            </div>
-            <div class="min-picture" data-control="4"><img src="img/pexels-pavel-chernonogov-2381463.jpg" alt=""></div>
-            <div class="min-picture" data-control="5"><img src="img/pexels-tima-miroshnichenko-5845973-2.jpg" alt="">
-            </div>
-        </div>
+        <a id="picture"></a>
+        
         <!-- <img class="gallery__picture" src="/welder-blue.jpg"></img> -->
         <div class="gallery__picture" data-slide="1"
             style="background-image: url(img/pexels-anna-shvets-4315558-2.jpg);">
@@ -248,14 +244,37 @@
             <h3 class="gallery__picture__h3">Spawamy metodą MIG MAG TIG.<br>
                 Dzięki doświadczeniu naszych spawaczy poradzimy sobie z wszytkim</h3>
         </div>
+
+        <div class="gallery__min-picture">
+          
+            <div class="min-picture is-selected" data-control="1" data-option="Toczenie"><a href="#picture"><img src="img/pexels-anna-shvets-4315558-2.jpg"></a>
+            </div>
+
+            <div class="min-picture" data-control="2" data-option="Spawanie"><a href="#picture"><img src="img/welder.jpg" alt=""></a></div>
+
+            <div class="min-picture" data-control="3" data-option="Cięcie plazmą"><a href="#picture"><img src="img/pexels-rik-schots-11624248.jpg" alt=""></a>
+            </div>
+
+            <div class="min-picture" data-control="4" data-option=""><a href="#picture"><img src="img/pexels-pavel-chernonogov-2381463.jpg" alt=""></a>
+            </div>
+
+            <div class="min-picture" data-control="5"><a href="#picture"><img src="img/pexels-tima-miroshnichenko-5845973-2.jpg" alt=""></a>
+           
+            </div>
+        </div>
     </section>
 
     <!-- end of gallery -->
     <div class="partners">
         <h1 class="partners__h1">Nasi partnerzy</h1>
+        <ul class="partners__mobile hide">
+            <li><img src="img/partners/frai-berlin.svg"></li>
+            <li><img src="img/partners/insbud.png"></li>
+            <li><img src="img/partners/kowol.png"></li>
+            <li><img src="img/partners/elektropark_logo.jpg"></li>
+        </ul>
 
-
-        <ul id="c">
+        <ul id="c" class="partners__desktop hide">
 
             <li class="li"><img src="img/partners/frai-berlin.svg"></li>
             <li class="li"><img src="img/partners/insbud.png"></li>
@@ -269,6 +288,7 @@
 
 
         </ul>
+
     </div>
     <!-- end of partners -->
 
@@ -308,7 +328,7 @@
             </div>
             <div class="social-media">
                 <h2>Sprawdź co u nas słychać:</h2>
-                <a href="https://www.facebook.com/StalCompany/" target="_blank"><i
+                <a href="https://www.facebook.com/StalCompany/" target="_blank" class="facebook"><i
                         class="fa-brands fa-facebook-square"></i>fb.com/stalcompany</a><br>
                 <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             </div>
