@@ -9,8 +9,8 @@ const navBarScroll = 80;
 
 
 window.addEventListener('scroll', () => {
-    console.log(scrollY);
-    if (scrollY > navBarScroll && window.innerWidth > 900) {
+
+    if (scrollY > navBarScroll && window.innerWidth > 1024) {
         navBar.classList.add("nav__active")
         navLogo.src = "img/only_logo.png"
         navUl.forEach((li) => {
@@ -24,7 +24,7 @@ window.addEventListener('scroll', () => {
             i.classList.add('fa-brands__active')
         })
 
-    } else if (scrollY < navBarScroll && window.innerWidth > 900) {
+    } else if (scrollY < navBarScroll && window.innerWidth > 1023) {
         navBar.classList.remove('nav__active');
         navLogo.src = "img/only_logo-white.png"
         navUl.forEach((li) => {
@@ -43,13 +43,13 @@ const menuButton = document.querySelector('.nav__hamburger');
 const menuMobile = document.querySelector('.nav__menu-list')
 
 
-    const mobile = function(){
+const mobile = function () {
     menuButton.classList.toggle('nav__hamburer__active');
     menuMobile.classList.toggle('nav__menu-list__mobile');
     menuMobile.classList.toggle('nav__menu-list__active')
 }
 menuButton.addEventListener('click', mobile);
-navLi.forEach((li) => { li.addEventListener('click', mobile )})
+navLi.forEach((li) => { li.addEventListener('click', mobile) })
 
 // galeria 
 
@@ -57,14 +57,16 @@ const profesions = {
     profesion: '',
 }
 let id = '';
+
 const minPicture = document.querySelectorAll('.min-picture');
 const galleryPicture = document.querySelectorAll(".gallery__picture");
 const createH1 = document.createElement('h1');
-minPicture.forEach((item) => {
+minPicture.forEach((item, index) => {
     item.addEventListener('click', function () {
 
         id = this.dataset.control;
-        profesions.profesion = this.dataset.option;
+        number = index;
+       profesions.profesion = this.dataset.option;
         console.log(this.dataset.option);
         minPicture.forEach(function (i) {
             i.classList.remove('is-selected')
@@ -85,66 +87,145 @@ minPicture.forEach((item) => {
     })
 })
 
-const changePartnersElement = function(){
-window.addEventListener('scroll', function(){
+// const changePartnersElement = function(){
+// window.addEventListener('scroll', function(){
 
-if(window.innerWidth < 800){
-    document.querySelector('.partners__mobile').classList.remove('hide');
-    document.querySelector('.partners__desktop').classList.add('hide');
+// if(window.innerWidth < 1024){
+//     document.querySelector('.partners__mobile').classList.remove('hide');
+//     document.querySelector('.partners__desktop').classList.add('hide');
 
 
-    
-}else {
-    document.querySelector('.partners__mobile').classList.add('hide');
-    document.querySelector('.partners__desktop').classList.remove('hide');
 
-  
+// }else {
+//     document.querySelector('.partners__mobile').classList.add('hide');
+//     document.querySelector('.partners__desktop').classList.remove('hide');
+
+
+// }
+// })
+
+// }
+
+// changePartnersElement();
+
+
+if (window.innerWidth > 1024) {
+    var timer = 4000;
+
+    var i = 0;
+    var max = $('#c > .li').length;
+
+
+
+    $("#c > li").eq(i).addClass('active').css('left', '0');
+    $("#c > li").eq(i + 1).addClass('active').css('left', '25%');
+    $("#c > li").eq(i + 2).addClass('active').css('left', '50%');
+    $("#c > li").eq(i + 3).addClass('active').css('left', '75%');
+
+
+    setInterval(function () {
+
+        $("#c > li").removeClass('active');
+
+        $("#c > li").eq(i).css('transition-delay', '0.25s');
+        $("#c > li").eq(i + 1).css('transition-delay', '0.5s');
+        $("#c > li").eq(i + 2).css('transition-delay', '0.75s');
+        $("#c > li").eq(i + 3).css('transition-delay', '1s');
+
+        if (i < max - 4) {
+            i = i + 4;
+        }
+
+        else {
+            i = 0;
+        }
+
+        $("#c > li").eq(i).css('left', '0').addClass('active').css('transition-delay', '1.25s');
+        $("#c > li").eq(i + 1).css('left', '25%').addClass('active').css('transition-delay', '1.5s');
+        $("#c > li").eq(i + 2).css('left', '50%').addClass('active').css('transition-delay', '1.75s');
+        $("#c > li").eq(i + 3).css('left', '75%').addClass('active').css('transition-delay', '2s');
+
+    }, timer);
 }
+
+let number = 0;
+
+const changePictureForMobile = function () {
+
+    if (number === galleryPicture.length) {
+        number = 0;
+    }
+    galleryPicture.forEach(function (item) {
+        item.classList.add('display-hide');
+
+    })
+    galleryPicture[number].classList.remove('display-hide');
+    let slideNumber = galleryPicture[number].dataset.slide;
+
+
+    minPicture.forEach(function (i) {
+        i.classList.remove('is-selected');
+    })
+    minPicture[number].classList.add('is-selected');
+    number++;
+}
+
+if (window.innerWidth < 819) {
+    setInterval(changePictureForMobile, 4000);
+} else { false }
+
+
+
+function handswipe(obj) {
+    if (obj) {
+        if (number === galleryPicture.length) {
+            number = 0;
+        }
+        galleryPicture.forEach(function (item) {
+            item.classList.add('display-hide');
+    
+        })
+        galleryPicture[number].classList.remove('display-hide');
+        let slideNumber = galleryPicture[number].dataset.slide;
+    
+    
+        minPicture.forEach(function (i) {
+            i.classList.remove('is-selected');
+        })
+        minPicture[number].classList.add('is-selected');
+        number--;
+        
+    } else {
+        changePictureForMobile();
+    }
+}
+
+const touchpanel = document.querySelector('.gallery');
+let startX,
+    startY,
+    threshold = 150,
+    swipe,
+    check,
+    distance;
+
+
+touchpanel.addEventListener('touchstart', function (e) {
+    let touchobj = e.changedTouches[0];
+    check = e.touches[0];
+    startX = touchobj.pageX;
+    startY = touchobj.pageY;
+    distance = 0;
+    e.preventDefault();
 })
 
+touchpanel.addEventListener('touchmove', function (e) {
+    e.preventDefault();
+})
 
-
-}
-
-
-changePartnersElement();
-
-
-if( window.innerWidth > 800){
-var timer = 4000;
-
-var i = 0;
-var max = $('#c > .li').length;
-
-
-
-$("#c > li").eq(i).addClass('active').css('left','0');
-$("#c > li").eq(i + 1).addClass('active').css('left','25%');
-$("#c > li").eq(i + 2).addClass('active').css('left','50%');
-$("#c > li").eq(i + 3).addClass('active').css('left','75%');
-
-
-setInterval(function () {
-
-    $("#c > li").removeClass('active');
-
-    $("#c > li").eq(i).css('transition-delay', '0.25s');
-    $("#c > li").eq(i + 1).css('transition-delay', '0.5s');
-    $("#c > li").eq(i + 2).css('transition-delay', '0.75s');
-    $("#c > li").eq(i + 3).css('transition-delay', '1s');
-
-    if (i < max - 4) {
-        i = i + 4;
-    }
-
-    else {
-        i = 0;
-    }
-
-    $("#c > li").eq(i).css('left', '0').addClass('active').css('transition-delay', '1.25s');
-    $("#c > li").eq(i + 1).css('left', '25%').addClass('active').css('transition-delay', '1.5s');
-    $("#c > li").eq(i + 2).css('left', '50%').addClass('active').css('transition-delay', '1.75s');
-    $("#c > li").eq(i + 3).css('left', '75%').addClass('active').css('transition-delay', '2s');
-
-}, timer);
-}
+touchpanel.addEventListener('touchend', function (e) {
+    let touchobj = e.changedTouches[0];
+    distance = touchobj.pageX - startX;
+    swipe = (distance >= threshold && Math.abs(touchobj.pageY - startY) <= 100);
+    handswipe(swipe);
+    e.preventDefault();
+})
