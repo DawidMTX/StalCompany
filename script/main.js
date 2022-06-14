@@ -66,7 +66,7 @@ minPicture.forEach((item, index) => {
 
         id = this.dataset.control;
         number = index;
-       profesions.profesion = this.dataset.option;
+        profesions.profesion = this.dataset.option;
         console.log(this.dataset.option);
         minPicture.forEach(function (i) {
             i.classList.remove('is-selected')
@@ -147,7 +147,7 @@ if (window.innerWidth > 1024) {
 
     }, timer);
 }
-
+let time = 4000;
 let number = 0;
 
 const changePictureForMobile = function () {
@@ -170,62 +170,98 @@ const changePictureForMobile = function () {
     number++;
 }
 
-if (window.innerWidth < 819) {
-    setInterval(changePictureForMobile, 4000);
-} else { false }
+
 
 
 
 function handswipe(obj) {
-    if (obj) {
-        if (number === galleryPicture.length) {
-            number = 0;
-        }
+    if (obj == true) {
+        clearInterval(changeSlider)
+        number--;
+        if (number == -1) { number = galleryPicture.length - 1 }
+        
         galleryPicture.forEach(function (item) {
             item.classList.add('display-hide');
-    
+
         })
+      
         galleryPicture[number].classList.remove('display-hide');
-        let slideNumber = galleryPicture[number].dataset.slide;
-    
-    
+
+
         minPicture.forEach(function (i) {
             i.classList.remove('is-selected');
         })
         minPicture[number].classList.add('is-selected');
-        number--;
-        
-    } else {
-        changePictureForMobile();
+        changeSlider = setInterval(changePictureForMobile, time)
     }
+
+    if (obj == false) {
+        clearInterval(changeSlider)
+        number++;
+        if (number == galleryPicture.length) { number = 0 }
+        
+        galleryPicture.forEach(function (item) {
+            item.classList.add('display-hide');
+
+        })
+        
+        galleryPicture[number].classList.remove('display-hide');
+
+
+        minPicture.forEach(function (i) {
+            i.classList.remove('is-selected');
+        })
+        minPicture[number].classList.add('is-selected');
+        changeSlider = setInterval(changePictureForMobile, time)
+    }
+
 }
 
-const touchpanel = document.querySelector('.gallery');
+// if (window.innerWidth < 819) {
+    let changeSlider = setInterval(changePictureForMobile, time);
+//  } else { false }
+
+// const touchpanel = document.querySelector('.gallery');
 let startX,
     startY,
-    threshold = 150,
+    threshold = 10,
     swipe,
     check,
     distance;
 
+galleryPicture.forEach(function (touchpanel) {
 
-touchpanel.addEventListener('touchstart', function (e) {
-    let touchobj = e.changedTouches[0];
-    check = e.touches[0];
-    startX = touchobj.pageX;
-    startY = touchobj.pageY;
-    distance = 0;
-    e.preventDefault();
-})
+    touchpanel.addEventListener('touchstart', function (e) {
 
-touchpanel.addEventListener('touchmove', function (e) {
-    e.preventDefault();
-})
+        let touchobj = e.changedTouches[0];
+        check = e.touches[0];
+        startX = touchobj.pageX;
+        console.log(startX)
+        startY = touchobj.pageY;
+        distance = 0;
+        e.preventDefault();
+    })
 
-touchpanel.addEventListener('touchend', function (e) {
-    let touchobj = e.changedTouches[0];
-    distance = touchobj.pageX - startX;
-    swipe = (distance >= threshold && Math.abs(touchobj.pageY - startY) <= 100);
-    handswipe(swipe);
-    e.preventDefault();
+    touchpanel.addEventListener('touchmove', function (e) {
+        
+        e.preventDefault();
+    })
+
+    touchpanel.addEventListener('touchend', function (e) {
+        e.preventDefault();
+
+        let touchobjend = e.changedTouches[0];
+        distance = touchobjend.pageX - startX;
+        console.log(`Distance: ` + distance)
+        if ((distance >= threshold && (touchobjend.pageY - startY) <= 150) > 0) {
+            swipe = true
+        }
+        else { swipe = false }
+
+        console.log(swipe)
+        return handswipe(swipe)
+
+
+
+    })
 })
