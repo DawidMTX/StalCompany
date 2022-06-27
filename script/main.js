@@ -58,6 +58,8 @@ const profesions = {
 }
 let id = '';
 
+
+
 const minPicture = document.querySelectorAll('.min-picture');
 const galleryPicture = document.querySelectorAll(".gallery__picture");
 const createH1 = document.createElement('h1');
@@ -87,6 +89,7 @@ minPicture.forEach((item, index) => {
     })
 })
 
+
 // const changePartnersElement = function(){
 // window.addEventListener('scroll', function(){
 
@@ -108,19 +111,20 @@ minPicture.forEach((item, index) => {
 
 // changePartnersElement();
 
+let position = 'left'
 
-if (window.innerWidth > 1024) {
+if(window.innerWidth >= 1024) {
+     position = 'left'
+
+
     var timer = 4000;
 
     var i = 0;
     var max = $('#c > .li').length;
-
-
-
-    $("#c > li").eq(i).addClass('active').css('left', '0');
-    $("#c > li").eq(i + 1).addClass('active').css('left', '25%');
-    $("#c > li").eq(i + 2).addClass('active').css('left', '50%');
-    $("#c > li").eq(i + 3).addClass('active').css('left', '75%');
+    $("#c > li").eq(i).addClass('active').css(position, '0');
+    $("#c > li").eq(i + 1).addClass('active').css(position, '25%');
+    $("#c > li").eq(i + 2).addClass('active ').css(position, '50%');
+    $("#c > li").eq(i + 3).addClass('active ').css(position, '75%');
 
 
     setInterval(function () {
@@ -140,17 +144,90 @@ if (window.innerWidth > 1024) {
             i = 0;
         }
 
-        $("#c > li").eq(i).css('left', '0').addClass('active').css('transition-delay', '1.25s');
-        $("#c > li").eq(i + 1).css('left', '25%').addClass('active').css('transition-delay', '1.5s');
-        $("#c > li").eq(i + 2).css('left', '50%').addClass('active').css('transition-delay', '1.75s');
-        $("#c > li").eq(i + 3).css('left', '75%').addClass('active').css('transition-delay', '2s');
+        $("#c > li").eq(i).css(position, '0').addClass('active').css('transition-delay', '1.25s');
+        $("#c > li").eq(i + 1).css(position, '25%').addClass('active').css('transition-delay', '1.5s');
+        $("#c > li").eq(i + 2).css(position, '50%').addClass('active').css('transition-delay', '1.75s');
+        $("#c > li").eq(i + 3).css(position, '75%').addClass('active').css('transition-delay', '2s');
+
+    }, timer);}
+else if (window.innerWidth < 750) {
+    position = 'top'
+
+    var timer = 4000;
+
+    var i = 0;
+    var max = $('#c > .li').length;
+    $("#c > li").eq(i).addClass('active').css(position, '0');
+    $("#c > li").eq(i + 1).addClass('active').css(position, '25%');
+    $("#c > li").eq(i + 2).addClass('active ').css(position, '50%');
+    $("#c > li").eq(i + 3).addClass('active ').css(position, '75%');
+
+
+    setInterval(function () {
+
+        $("#c > li").removeClass('active');
+
+        $("#c > li").eq(i).css('transition-delay', '0.25s');
+        $("#c > li").eq(i + 1).css('transition-delay', '0.5s');
+        $("#c > li").eq(i + 2).css('transition-delay', '0.75s');
+        $("#c > li").eq(i + 3).css('transition-delay', '1s');
+
+        if (i < max - 4) {
+            i = i + 4;
+        }
+
+        else {
+            i = 0;
+        }
+
+        $("#c > li").eq(i).css(position, '0').addClass('active').css('transition-delay', '1.25s');
+        $("#c > li").eq(i + 1).css(position, '25%').addClass('active').css('transition-delay', '1.5s');
+        $("#c > li").eq(i + 2).css(position, '50%').addClass('active').css('transition-delay', '1.75s');
+        $("#c > li").eq(i + 3).css(position, '75%').addClass('active').css('transition-delay', '2s');
 
     }, timer);
-}
-let time = 4000;
+} else if (window.innerWidth > 751 && window.innerWidth < 1023) {
+        position = 'left';
+        var timer = 4000;
+
+        var i = 0;
+        var max = $('#c > .li').length;
+        $("#c > li").eq(i).addClass('active').css(position, '0');
+        $("#c > li").eq(i + 1).addClass('active').css(position, '50%');
+        $("#c > li").eq(i + 2).addClass('active pos').css(position, '0');
+        $("#c > li").eq(i + 3).addClass('active pos').css(position, '50%');
+
+
+        setInterval(function () {
+
+            $("#c > li").removeClass('active');
+
+            $("#c > li").eq(i).css('transition-delay', '0.25s');
+            $("#c > li").eq(i + 1).css('transition-delay', '0.5s');
+            $("#c > li").eq(i + 2).css('transition-delay', '0.75s');
+            $("#c > li").eq(i + 3).css('transition-delay', '1s');
+
+            if (i < max - 4) {
+                i = i + 4;
+            }
+
+            else {
+                i = 0;
+            }
+
+            $("#c > li").eq(i).css(position, '0').addClass('active').css('transition-delay', '1.25s');
+            $("#c > li").eq(i + 1).css(position, '50%').addClass('active').css('transition-delay', '1.5s');
+            $("#c > li").eq(i + 2).css(position, '0').addClass('active pos').css('transition-delay', '1.75s');
+            $("#c > li").eq(i + 3).css(position, '50%').addClass('active pos').css('transition-delay', '2s');
+
+        }, timer);
+    } 
+
+
+let time = 6000;
 let number = 0;
 
-const changePictureForMobile = function () {
+const changePictureForMobile = function (item) {
 
     if (number === galleryPicture.length) {
         number = 0;
@@ -168,6 +245,8 @@ const changePictureForMobile = function () {
     })
     minPicture[number].classList.add('is-selected');
     number++;
+
+
 }
 
 
@@ -179,12 +258,12 @@ function handswipe(obj) {
         clearInterval(changeSlider)
         number--;
         if (number == -1) { number = galleryPicture.length - 1 }
-        
+
         galleryPicture.forEach(function (item) {
             item.classList.add('display-hide');
 
         })
-      
+
         galleryPicture[number].classList.remove('display-hide');
 
 
@@ -199,12 +278,12 @@ function handswipe(obj) {
         clearInterval(changeSlider)
         number++;
         if (number == galleryPicture.length) { number = 0 }
-        
+
         galleryPicture.forEach(function (item) {
             item.classList.add('display-hide');
 
         })
-        
+
         galleryPicture[number].classList.remove('display-hide');
 
 
@@ -218,8 +297,8 @@ function handswipe(obj) {
 }
 
 // if (window.innerWidth < 819) {
-    let changeSlider = setInterval(changePictureForMobile, time);
-//  } else { false }
+let changeSlider = setInterval(changePictureForMobile, time);
+//  } else { return }
 
 // const touchpanel = document.querySelector('.gallery');
 let startX,
@@ -243,7 +322,7 @@ galleryPicture.forEach(function (touchpanel) {
     })
 
     touchpanel.addEventListener('touchmove', function (e) {
-        
+
         e.preventDefault();
     })
 
